@@ -9,7 +9,6 @@ resource "github_actions_secret" "example_secret" {
   plaintext_value = "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"
 }
 
-
 resource "github_repository" "example" {
   name       = "github-terraform-task-AndriiChapurin"
   auto_init  = true
@@ -35,10 +34,13 @@ resource "github_branch_protection" "main" {
     contexts = ["ci/test"]
   }
 
-required_pull_request_reviews {
+  required_pull_request_reviews {
     dismiss_stale_reviews          = true
     require_code_owner_reviews     = true
-    dismissal_restrictions = ["users", "teams"]
+    dismissal_restrictions {
+      users = ["example_user"]
+      teams = ["example_team"]
+    }
   }
 }
 
@@ -55,7 +57,10 @@ resource "github_branch_protection" "develop" {
   required_pull_request_reviews {
     dismiss_stale_reviews          = false
     require_code_owner_reviews     = true
-    dismissal_restrictions = ["users", "teams"]
+    dismissal_restrictions {
+      users = ["example_user"]
+      teams = ["example_team"]
+    }
     required_approving_review_count = 2
   }
 }
@@ -72,6 +77,7 @@ resource "github_repository_file" "codeowners" {
   content    = "* @softservedata"
   branch     = "main"
 }
+
 resource "github_repository_deploy_key" "deploy_key" {
   repository = github_repository.example.name
   key        = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD5Y7Y4SStWqRxgqP0qc5bfWsB3Cji5vRtQMT+ZQNkKfz8YBqZ9IID/9OHCegdGrHAwPVAPuA2jES5pWxQCnPhM7rhKFcguFfPB3ZXDRTDwrhrWY4XfD7Q7g0ObCq6JsxBmNlMwEWOWcTG33LVN8uS96MpC9y8DjP1cYyk6nom+g85XvdX34/YffGav+98AucXybFfrnldigDdyXzLLk8QMrAoREaMbyvlRADr/altWDJ1KdTM4f4JVsyV+ze7zJs8zOCPcEy1gfNB9hU5DmP9Fvpg/OiGozQwDXos0yZ+3dnBzgpdKDnW/njsOloZZIhn7Xtsti7ITbyzKACLWfsaJ Andrii@macs-MacBook-Pro.local"
