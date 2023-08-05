@@ -50,11 +50,10 @@ resource "github_branch_protection" "main" {
     strict   = true
     contexts = ["ci/test"]
   }
-}
 
   required_pull_request_reviews {
     dismiss_stale_reviews          = true
-    require_code_owner_reviews     = false
+    require_code_owner_reviews     = true
   }
 }
 
