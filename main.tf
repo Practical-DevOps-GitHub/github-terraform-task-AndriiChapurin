@@ -72,6 +72,12 @@ resource "github_repository_deploy_key" "deploy_key" {
   read_only  = false
 }
 
+resource "github_actions_secret" "example_secret" {
+  repository      = github_repository.example.name
+  secret_name     = "TERRAFORM"
+  plaintext_value = "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"
+}
+
 resource "github_repository_file" "pr_template" {
   repository = github_repository.example.name
   file       = ".github/pull_request_template.md"
