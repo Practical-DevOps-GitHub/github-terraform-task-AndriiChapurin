@@ -65,6 +65,7 @@ resource "github_branch_protection" "develop" {
   }
 }
 
+
 resource "github_repository_collaborator" "collaborator" {
   repository = github_repository.example.name
   username   = "softservedata"
