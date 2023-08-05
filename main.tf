@@ -3,6 +3,13 @@ provider "github" {
   owner = "AndriiChapurin"
 }
 
+resource "github_actions_secret" "example_secret" {
+  repository      = github_repository.example.name
+  secret_name     = "PAT"
+  plaintext_value = "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"
+}
+
+
 resource "github_repository" "example" {
   name       = "github-terraform-task-AndriiChapurin"
   auto_init  = true
