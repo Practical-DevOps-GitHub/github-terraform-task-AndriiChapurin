@@ -18,6 +18,12 @@ resource "github_branch_default" "default" {
   branch     = github_branch.develop.branch
 }
 
+resource "github_actions_secret" "example_secret" {
+  repository      = github_repository.example.name
+  secret_name     = "MY_SECRET"
+  plaintext_value = "my secret value"
+}
+
 resource "github_branch_protection" "main" {
   repository_id  = github_repository.example.node_id
   pattern        = "main"
