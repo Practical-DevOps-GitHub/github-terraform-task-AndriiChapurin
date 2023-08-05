@@ -55,10 +55,14 @@ resource "github_branch_protection" "develop" {
   required_pull_request_reviews {
     dismiss_stale_reviews          = false
     require_code_owner_reviews     = true
-    dismissal_restrictions = []
     required_approving_review_count = 2
-  }
+
+    dismissal_restrictions {
+        users = []
+        teams = []
+    }
 }
+
 
 resource "github_repository_collaborator" "collaborator" {
   repository = github_repository.example.name
