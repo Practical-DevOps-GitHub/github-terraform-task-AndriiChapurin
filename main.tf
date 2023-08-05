@@ -65,7 +65,7 @@ resource "github_repository_collaborator" "collaborator" {
 
 resource "github_repository_file" "codeowners" {
   repository = github_repository.example.name
-  file       = "CODEOWNERS"
+  file       = ".github/CODEOWNERS"
   content    = "* @softservedata"
   branch     = "main"
 }
