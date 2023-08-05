@@ -74,6 +74,7 @@ resource "github_repository_file" "pr_template" {
   - [ ] Do we need to implement analytics?
   - [ ] Will this be part of a product update? If yes, please write one phrase about this update
   EOF
+
   branch     = "main"
 }
 
