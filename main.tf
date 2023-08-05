@@ -28,19 +28,23 @@ resource "github_branch_default" "default" {
 resource "github_branch_protection" "main" {
   repository_id  = github_repository.example.node_id
   pattern        = "main"
-  enforce_admins = true
+  enforce_admins = false
 
   required_status_checks {
     strict   = true
     contexts = ["ci/test"]
   }
 
-required_pull_request_reviews {
-    dismiss_stale_reviews          = true
+  required_pull_request_reviews {
+    dismiss_stale_reviews          = false
     require_code_owner_reviews     = true
-    dismissal_restrictions = ["users", "teams"]
+    dismissal_restrictions = {
+      users = ["softservedata"]
+      teams = []
+    }
   }
 }
+
 
 resource "github_branch_protection" "develop" {
   repository_id  = github_repository.example.node_id
@@ -55,9 +59,13 @@ resource "github_branch_protection" "develop" {
   required_pull_request_reviews {
     dismiss_stale_reviews          = false
     require_code_owner_reviews     = true
-    required_approving_review_count = 2
+    dismissal_restrictions = {
+      users = ["softservedata"]
+      teams = []
+    }
   }
 }
+
 
 resource "github_repository_collaborator" "collaborator" {
   repository = github_repository.example.name
