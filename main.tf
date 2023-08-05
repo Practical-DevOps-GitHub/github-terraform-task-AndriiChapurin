@@ -1,5 +1,5 @@
 provider "github" {
-  token        = "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"
+  token        = "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"
   owner = "AndriiChapurin"
 }
 
