@@ -31,8 +31,9 @@ resource "github_branch_protection" "main" {
   required_pull_request_reviews {
     dismiss_stale_reviews          = true
     require_code_owner_reviews     = true
-    dismissal_restrictions {
+    dismissal_restrictions = {
       users = ["softservedata"]
+      teams = []
     }
   }
 }
@@ -50,8 +51,9 @@ resource "github_branch_protection" "develop" {
   required_pull_request_reviews {
     dismiss_stale_reviews          = false
     require_code_owner_reviews     = true
-    dismissal_restrictions {
+    dismissal_restrictions = {
       users = ["softservedata"]
+      teams = []
     }
     required_approving_review_count = 2
   }
